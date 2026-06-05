@@ -1,0 +1,126 @@
+[2025-09-08 09:48:55.0947]
+[POST] <PosApiCommon>
+[Request]
+  - Sent time ： 2025-09-08 09:48:54.707
+  - URL       ： http://192.168.17.162:60032//api/Token/GetToken
+  - Headers   ： 
+       * (HttpHeader) Content-Type : application/json
+       * (RequestBody) application/json : {"ApplicantUnifiedNumber":"","StoreUUID":"5979e304-0435-4ffc-8912-735b027ce9fa","StoreUnifiedNumber":""}
+[Response]
+  - Received time： 2025-09-08 09:48:54.762
+  - Status code  ： [200] OK
+  - Content      ： {"IsSuccess":false,"IsBackupSuccess":false,"Message":"NA:資料驗證錯誤","ReturnObject":{"Status":1,"ErrorMessage":""}}
+____________________________________________________________________________________
+ 
+[2025-09-08 09:48:55.1055]
+[POST] <PosApiCommon>
+[Request]
+  - Sent time ： 2025-09-08 09:48:54.779
+  - URL       ： http://192.168.17.162:60032//api/Get/CompanyInfo
+  - Headers   ： 
+       * (HttpHeader) Content-Type : application/json
+       * (HttpHeader) Token : 
+[Response]
+  - Received time： 2025-09-08 09:48:54.786
+  - Status code  ： [200] OK
+  - Content      ： {"IsSuccess":false,"IsBackupSuccess":false,"Message":"Expired:Token過期，請重新取得。","ReturnObject":null}
+____________________________________________________________________________________
+ 
+[2025-09-08 09:48:55.1055]
+[POST] <PosApiCommon>
+[Request]
+  - Sent time ： 2025-09-08 09:48:54.786
+  - URL       ： http://192.168.17.162:60032//api/Token/GetToken
+  - Headers   ： 
+       * (HttpHeader) Content-Type : application/json
+       * (RequestBody) application/json : {"ApplicantUnifiedNumber":"","StoreUUID":"5979e304-0435-4ffc-8912-735b027ce9fa","StoreUnifiedNumber":""}
+[Response]
+  - Received time： 2025-09-08 09:48:54.837
+  - Status code  ： [200] OK
+  - Content      ： {"IsSuccess":false,"IsBackupSuccess":false,"Message":"NA:資料驗證錯誤","ReturnObject":{"Status":1,"ErrorMessage":""}}
+____________________________________________________________________________________
+ 
+[2025-09-08 09:48:55.1055]
+[POST] <PosApiCommon>
+[Request]
+  - Sent time ： 2025-09-08 09:48:54.837
+  - URL       ： http://192.168.17.162:60032//api/Token/GetToken
+  - Headers   ： 
+       * (HttpHeader) Content-Type : application/json
+       * (RequestBody) application/json : {"ApplicantUnifiedNumber":"","StoreUUID":"5979e304-0435-4ffc-8912-735b027ce9fa","StoreUnifiedNumber":""}
+[Response]
+  - Received time： 2025-09-08 09:48:54.886
+  - Status code  ： [200] OK
+  - Content      ： {"IsSuccess":false,"IsBackupSuccess":false,"Message":"NA:資料驗證錯誤","ReturnObject":{"Status":1,"ErrorMessage":""}}
+____________________________________________________________________________________
+ 
+[2025-09-08 09:48:55.1055]
+[POST] <PosApiCommon>
+[Request]
+  - Sent time ： 2025-09-08 09:48:54.887
+  - URL       ： http://192.168.17.162:60032//api/Get/CompanyInfo
+  - Headers   ： 
+       * (HttpHeader) Content-Type : application/json
+       * (HttpHeader) Token : 
+[Response]
+  - Received time： 2025-09-08 09:48:54.893
+  - Status code  ： [200] OK
+  - Content      ： {"IsSuccess":false,"IsBackupSuccess":false,"Message":"Expired:Token過期，請重新取得。","ReturnObject":null}
+____________________________________________________________________________________
+ 
+[2025-09-08 09:48:55.1055]
+[POST] <PosApiCommon>
+[Request]
+  - Sent time ： 2025-09-08 09:48:54.893
+  - URL       ： http://192.168.17.162:60032//api/Token/GetToken
+  - Headers   ： 
+       * (HttpHeader) Content-Type : application/json
+       * (RequestBody) application/json : {"ApplicantUnifiedNumber":"","StoreUUID":"5979e304-0435-4ffc-8912-735b027ce9fa","StoreUnifiedNumber":""}
+[Response]
+  - Received time： 2025-09-08 09:48:54.943
+  - Status code  ： [200] OK
+  - Content      ： {"IsSuccess":false,"IsBackupSuccess":false,"Message":"NA:資料驗證錯誤","ReturnObject":{"Status":1,"ErrorMessage":""}}
+____________________________________________________________________________________
+ 
+[2025-09-08 09:48:55.1055]
+[POST] <PosApiCommon>
+[Request]
+  - Sent time ： 2025-09-08 09:48:54.944
+  - URL       ： http://192.168.17.162:60032//api/Token/GetToken
+  - Headers   ： 
+       * (HttpHeader) Content-Type : application/json
+       * (RequestBody) application/json : {"ApplicantUnifiedNumber":"","StoreUUID":"5979e304-0435-4ffc-8912-735b027ce9fa","StoreUnifiedNumber":""}
+[Response]
+  - Received time： 2025-09-08 09:48:54.993
+  - Status code  ： [200] OK
+  - Content      ： {"IsSuccess":false,"IsBackupSuccess":false,"Message":"NA:資料驗證錯誤","ReturnObject":{"Status":1,"ErrorMessage":""}}
+____________________________________________________________________________________
+ 
+[2025-09-08 09:48:55.1055]
+[POST] <PosApiCommon>
+[Request]
+  - Sent time ： 2025-09-08 09:48:54.993
+  - URL       ： http://192.168.17.162:60032//api/Get/CompanyInfo
+  - Headers   ： 
+       * (HttpHeader) Content-Type : application/json
+       * (HttpHeader) Token : 
+[Response]
+  - Received time： 2025-09-08 09:48:54.998
+  - Status code  ： [200] OK
+  - Content      ： {"IsSuccess":false,"IsBackupSuccess":false,"Message":"Expired:Token過期，請重新取得。","ReturnObject":null}
+____________________________________________________________________________________
+ 
+[2025-09-08 09:48:55.1055]
+[POST] <PosApiCommon>
+[Request]
+  - Sent time ： 2025-09-08 09:48:54.998
+  - URL       ： http://192.168.17.162:60032//api/Token/GetToken
+  - Headers   ： 
+       * (HttpHeader) Content-Type : application/json
+       * (RequestBody) application/json : {"ApplicantUnifiedNumber":"","StoreUUID":"5979e304-0435-4ffc-8912-735b027ce9fa","StoreUnifiedNumber":""}
+[Response]
+  - Received time： 2025-09-08 09:48:55.048
+  - Status code  ： [200] OK
+  - Content      ： {"IsSuccess":false,"IsBackupSuccess":false,"Message":"NA:資料驗證錯誤","ReturnObject":{"Status":1,"ErrorMessage":""}}
+____________________________________________________________________________________
+ 
