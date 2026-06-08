@@ -6,7 +6,7 @@ from streamlit_gsheets import GSheetsConnection
 # 網頁基本設定
 st.set_page_config(page_title="Google Sheet 智能圖表產生器", layout="wide")
 st.title("🚀 Google Sheet 智能圖表產生器")
-st.write("請直接在下方貼上網址，系統將為您自動辨識並生成圖表。")
+st.write("請直接在下方貼上網址，系統將為您自動辨識並生成圖表。1")
 
 # 1. 網址輸入框
 sheet_url = st.text_input(
