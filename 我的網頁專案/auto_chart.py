@@ -2,10 +2,13 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from streamlit_gsheets import GSheetsConnection
+from google import genai  # 導入 Gemini 官方套件
+import os
+import toml
 
 # 網頁基本設定
-st.set_page_config(page_title="Google Sheet 智能圖表產生器", layout="wide")
-st.title("🚀 Google Sheet 智能圖表產生器")
+st.set_page_config(page_title="Google Sheet 智能圖表與 AI 產生器", layout="wide")
+st.title("🚀 Google Sheet 智能圖表與 AI 產生器")
 st.write("請直接在下方貼上網址，系統將為您自動辨識並生成圖表。")
 
 # 1. 網址輸入框
@@ -40,12 +43,9 @@ if sheet_url:
         
         st.success("✅ 成功精準讀取雲端資料！")
         
-        # 🌟 修正重點：完整列出全部資料，並在資料量大時自動開啟捲軸
+        # 完整數據檢視 (附帶捲軸)
         with st.expander("📋 點擊展開/收合【完整數據檢視】", expanded=True):
-            # 設定 height=230 大約就是 5 列資料的高度。大於 5 列時，右側與下方會自動跑出漂亮的捲軸！
-            # use_container_width=True 讓表格填滿網頁寬度
             st.dataframe(df, height=230, use_container_width=True)
-            # 額外小提示：顯示總共有幾列、幾欄
             st.caption(f"📊 目前表格總計：{df.shape[0]} 列 (Rows) ｜ {df.shape[1]} 欄 (Columns)")
         
         # 2. 欄位設定區
@@ -104,7 +104,79 @@ if sheet_url:
                     st.subheader("➡️ 綜合數值比較")
                     fig_bar = px.bar(df, x=selected_x, y=selected_y_cols, barmode="group", title="數據比較圖")
                     st.plotly_chart(fig_bar, use_container_width=True)
+
+            # 4. 🤖 Gemini 數據 AI 助理對話區
+            st.divider()
+            st.header("🤖 Gemini 數據 AI 助理")
+            st.write(f"系統已將上方【{selected_x}】的圖表與數據同步給 AI。您可以直接在下方輸入框提問。")
+            
+            # 🌟 修正重點：不再把金鑰寫死在程式裡！改回標準安全的 Secrets 自動抓取邏輯，順利通過 GitHub 檢查
+            api_key = None
+            if "GEMINI_API_KEY" in st.secrets:
+                api_key = st.secrets["GEMINI_API_KEY"]
+            else:
+                try:
+                    secret_path = os.path.join(".streamlit", "secrets.toml")
+                    if os.path.exists(secret_path):
+                        with open(secret_path, "r", encoding="utf-8") as f:
+                            local_secrets = toml.load(f)
+                            api_key = local_secrets.get("GEMINI_API_KEY")
+                except:
+                    pass
+
+            # 判斷金鑰
+            if not api_key:
+                st.warning("🔑 提示：請確認您的 Streamlit 雲端 Secrets 後台已填寫 `GEMINI_API_KEY` 才能開啟 AI 對話功能。")
+            else:
+                # 初始化 Gemini 客戶端
+                client = genai.Client(api_key=api_key)
+                
+                if "chat_history" not in st.session_state:
+                    st.session_state.chat_history = []
+                
+                # 對話紀錄容器
+                chat_container = st.container(height=300)
+                with chat_container:
+                    for message in st.session_state.chat_history:
+                        with st.chat_message(message["role"]):
+                            st.markdown(message["content"])
+                
+                # 下方聊天文字對話框
+                if user_query := st.chat_input("請輸入您想詢問 AI 的數據問題..."):
+                    with chat_container:
+                        with st.chat_message("user"):
+                            st.markdown(user_query)
+                    st.session_state.chat_history.append({"role": "user", "content": user_query})
                     
+                    # 數據處理
+                    chart_summary = counts_df.to_string()
+                    data_summary = df.head(100).to_string()
+                    
+                    system_prompt = (
+                        "你是一個專業的測試與數據分析專家。使用者剛剛在網頁上生成了圖表，以下是圖表與數據內容：\n\n"
+                        f"【使用者當前選擇的基準軸(X軸)】: {selected_x}\n"
+                        f"【圖表統計摘要 (各項目出現次數)】:\n{chart_summary}\n\n"
+                        f"【詳細測試數據預覽(前100筆)】:\n{data_summary}\n\n"
+                        "請根據以上資訊，精準且專業地回答使用者的問題。\n"
+                        f"【使用者問題】: {user_query}"
+                    )
+                    
+                    with chat_container:
+                        with st.chat_message("assistant"):
+                            message_placeholder = st.empty()
+                            with st.spinner("AI 正在閱讀圖表與分析數據..."):
+                                try:
+                                    response = client.models.generate_content(
+                                        model='gemini-2.5-flash',
+                                        contents=system_prompt,
+                                    )
+                                    ai_response = response.text
+                                    message_placeholder.markdown(ai_response)
+                                    st.session_state.chat_history.append({"role": "assistant", "content": ai_response})
+                                    st.rerun()
+                                except Exception as ai_err:
+                                    st.error(f"AI 回應失敗: {ai_err}")
+                                    
     except Exception as e:
         st.error(f"❌ 無法解析該網址，請確認 Google Sheet 是否已開啟「知道連結的任何人均可檢視」權限，或檢查分頁名稱是否輸入正確。")
         st.info(f"詳細錯誤訊息 (除錯用): {e}")
